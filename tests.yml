@@ -1,4 +1,5 @@
-taski_domain: http://localhost
-kittygram_domain: http://localhost
+taski_domain: https://ya.ru
+kittygram_domain: https://ya.ru
 
 dockerhub_username: niggapatrick
+repo_owner: niggapatrick
