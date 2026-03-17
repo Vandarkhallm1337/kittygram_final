@@ -1,5 +1,5 @@
-taski_domain: https://local_host
-kittygram_domain: https://local_host
+taski_domain: https://kittygram-final-qwfo.onrender.com
+kittygram_domain: https://kittygram-final-qwfo.onrender.com
 
 dockerhub_username: niggapatrick
 repo_owner: niggapatrick
