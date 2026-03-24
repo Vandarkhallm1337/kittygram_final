@@ -1,5 +1,6 @@
-FROM nginx:1.22.1
-COPY nginx.conf /etc/nginx/templates/default.conf.template
+FROM nginx:1.25-alpine
 
-# 🔥 ВАЖНО: копируем билд фронта напрямую
-COPY ../frontend/build /static/
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+# 🔥 КЛЮЧЕВОЕ — копируем frontend build
+COPY frontend/build /static/

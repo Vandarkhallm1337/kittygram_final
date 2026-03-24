@@ -1,35 +1,21 @@
-volumes:
-  pg_data:
-  static:
-  media:
+version: '3.9'
 
 services:
   db:
     image: postgres:13
     env_file: .env
-    volumes:
-      - pg_data:/var/lib/postgresql/data
 
   backend:
-    image: niggapatrick/kittygram_backend
+    build: ./backend
     env_file: .env
     depends_on:
       - db
-    volumes:
-      - static:/app/static
-      - media:/app/media
-
-  frontend:
-    image: niggapatrick/kittygram_frontend
-    volumes:
-      - static:/app/build
 
   gateway:
-    image: niggapatrick/kittygram_gateway
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
     ports:
       - "9000:80"
     depends_on:
       - backend
-    volumes:
-      - static:/static
-      - media:/media
