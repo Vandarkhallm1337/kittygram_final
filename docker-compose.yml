@@ -14,8 +14,7 @@ services:
     volumes:
       - static:/app/static
       - media:/app/media
-    command: >
-    sh -c "python manage.py migrate &&
+    command: sh -c "python manage.py migrate &&
            python manage.py collectstatic --noinput &&
            gunicorn kittygram_backend.wsgi:application --bind 0.0.0.0:8000"
 
