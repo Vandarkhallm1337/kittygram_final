@@ -22,7 +22,7 @@ RUN npm install && npm run build
 
 # переносим build в Django
 RUN mkdir -p /app/static/
-RUN cp -r /frontend/build/* /app/static/
+RUN cp -r /frontend/build /app/
 
 # обратно в backend
 WORKDIR /app

@@ -68,7 +68,7 @@ ROOT_URLCONF = 'kittygram_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'static'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,7 +82,7 @@ TEMPLATES = [
 ]
 
 TEMPLATES[0]['DIRS'] = [
-    BASE_DIR / 'static'
+    BASE_DIR / 'build'
 ]
 
 WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
