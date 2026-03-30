@@ -1,37 +1,13 @@
-FROM python:3.11-slim
+FROM python:3.10
 
 WORKDIR /app
 
-# системные зависимости
-RUN apt-get update && apt-get install -y \
-    gcc \
-    libpq-dev \
-    nodejs \
-    npm \
-    && rm -rf /var/lib/apt/lists/*
+RUN pip install gunicorn==20.1.0
 
-# копируем backend
-COPY backend/ /app/
+COPY requirements.txt .
 
-# копируем frontend
-COPY frontend/ /frontend/
+RUN pip install -r requirements.txt --no-cache-dir
 
-# собираем фронт
-WORKDIR /frontend
-RUN npm install && npm run build
+COPY . .
 
-# переносим build в Django
-RUN mkdir -p /app/static/
-RUN cp -r /frontend/build /app/
-
-# обратно в backend
-WORKDIR /app
-
-# зависимости python
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-
-# запуск
-CMD python manage.py migrate && \
-    python manage.py collectstatic --noinput && \
-    gunicorn kittygram_backend.wsgi:application --bind 0.0.0.0:$PORT
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi"]
