@@ -21,12 +21,13 @@ services:
   frontend:
     build: ./frontend
     env_file: .env
-    command: cp -r /app/build/. /static/
     volumes:
       - static:/static
 
   gateway:
-    build: ./nginx
+    build: 
+      context: .
+      dockerfile: nginx/Dockerfile
     ports:
       - "8000:80"
     depends_on:
