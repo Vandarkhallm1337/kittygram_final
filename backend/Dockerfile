@@ -2,9 +2,11 @@ FROM python:3.10
 
 WORKDIR /app
 
+COPY backend/ /app/
+
 RUN pip install gunicorn==20.1.0
 
-COPY requirements.txt .
+COPY backend/requirements.txt .
 
 RUN pip install -r requirements.txt --no-cache-dir
 
