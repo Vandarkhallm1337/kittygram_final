@@ -1,9 +1,4 @@
-version: '3'
-
-volumes:
-  pg_data:
-  static:
-  media:
+version: '3.9'
 
 services:
   db:
@@ -11,23 +6,33 @@ services:
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
+
   backend:
-    build: ./backend/
+    build: .
     env_file: .env
+    depends_on:
+      - db
     volumes:
-      - static:/static
-      - media:/media
+      - static:/app/static
+      - media:/app/media
+
   frontend:
-    env_file: .env
-    build: ./frontend/
+    build: ./frontend
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
+
   gateway:
-    build: ./nginx/
-    env_file: .env
+    build: ./nginx
     ports:
-      - 9000:80
+      - "9000:80"
+    depends_on:
+      - backend
     volumes:
       - static:/static
       - media:/media
+
+volumes:
+  pg_data:
+  static:
+  media:
