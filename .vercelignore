@@ -1,0 +1,3 @@
+backend/
+nginx/
+docker-compose.yml
