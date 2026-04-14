@@ -5,7 +5,6 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 
 RUN pip install --upgrade pip && \
-    pip install gunicorn==20.1.0 && \
     pip install -r requirements.txt --no-cache-dir
 
 COPY . .
